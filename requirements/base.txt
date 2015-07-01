@@ -1,12 +1,12 @@
--e git+https://github.com/nyaruka/smartmin.git@master#egg=smartmin-1.7.0
--e git+https://github.com/rapidpro/rapidpro-python.git@master#egg=rapidpro-python-1.0
+-e git+https://github.com/caktus/smartmin.git@python-3#egg=smartmin-1.7.0
+-e git+https://github.com/caktus/rapidpro-python.git@python-3#egg=rapidpro-python-1.0
 celery-with-redis
 django>=1.7.2
 django-compressor
 django-guardian
 django-nose
 django-redis==3.8.4
-django-timezones
+django-timezone-field
 enum34
 hamlpy
 Pillow

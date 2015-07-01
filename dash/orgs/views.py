@@ -4,7 +4,7 @@ import re
 from smartmin.views import (
     SmartCRUDL, SmartCreateView, SmartReadView, SmartUpdateView,
     SmartListView, SmartFormView, SmartTemplateView)
-from timezones.forms import TimeZoneField
+from timezone_field.forms import TimeZoneFormField
 
 from django import forms
 from django.conf import settings
@@ -123,7 +123,7 @@ class OrgForm(forms.ModelForm):
 
     subdomain = forms.CharField(help_text=_("The subdomain of this organization"), required=False)
 
-    timezone = TimeZoneField(help_text=_("The timezone your organization is in"))
+    timezone = TimeZoneFormField(help_text=_("The timezone your organization is in"))
 
     administrators = forms.ModelMultipleChoiceField(
         queryset=User.objects.exclude(username="root").exclude(username="root2").exclude(pk__lt=0))
