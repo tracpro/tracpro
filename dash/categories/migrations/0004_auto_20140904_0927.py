@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.db import models, migrations
+
 
 def populate_category_images(apps, schema_editor):
     Category = apps.get_model('categories', "Category")
     CategoryImage = apps.get_model('categories', "CategoryImage")
-    User = apps.get_model("auth", "User")
-    root = User.objects.filter(username="root").first()
 
+    User = apps.get_model(*settings.AUTH_USER_MODEL.split("."))
+
+    root = User.objects.filter(username="root").first()
     if not root:
         root = User.objects.filter(username="root2").first()
-
     if not root:
         root = User.objects.create(username="root2")
 
@@ -26,6 +28,7 @@ def populate_category_images(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
         ('categories', '0003_categoryimage'),
     ]
 

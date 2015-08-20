@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.db import models, migrations
 
+
 def generate_initial_block_types(apps, schema_editor):
-    User = apps.get_model("auth", "User")
+    User = apps.get_model(*settings.AUTH_USER_MODEL.split("."))
     root = User.objects.filter(username="root").first()
 
     if not root:
@@ -31,9 +33,7 @@ def generate_initial_block_types(apps, schema_editor):
                                         modified_by=root)
 
 
-
 class Migration(migrations.Migration):
-
     dependencies = [
         ('dashblocks', '0004_auto_20140902_1200'),
     ]
