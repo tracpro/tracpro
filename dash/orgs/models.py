@@ -9,7 +9,7 @@ from temba import TembaClient
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.core.cache import cache
 from django.db import models
 from django.utils import timezone
@@ -275,37 +275,6 @@ class Org(SmartModel):
 
     def __str__(self):
         return self.name
-
-
-def get_org(obj):
-    return getattr(obj, '_org', None)
-
-User.get_org = get_org
-
-
-def set_org(obj, org):
-    obj._org = org
-
-User.set_org = set_org
-
-
-def get_user_orgs(user):
-    if user.is_superuser:
-        return Org.objects.all()
-    user_orgs = user.org_admins.all() | user.org_editors.all() | user.org_viewers.all()
-    return user_orgs.distinct()
-
-User.get_user_orgs = get_user_orgs
-
-
-def get_org_group(obj):
-    org_group = None
-    org = obj.get_org()
-    if org:
-        org_group = org.get_user_org_group(obj)
-    return org_group
-
-User.get_org_group = get_org_group
 
 
 USER_GROUPS = (('A', _("Administrator")),
