@@ -8,6 +8,7 @@ from smartmin.models import SmartModel
 from temba import TembaClient
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User, Group
 from django.core.cache import cache
 from django.db import models
@@ -256,6 +257,7 @@ class Org(SmartModel):
 
     @classmethod
     def create_user(cls, email, password):
+        User = get_user_model()
         user = User.objects.create_user(username=email, email=email, password=password)
         return user
 

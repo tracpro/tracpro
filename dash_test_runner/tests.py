@@ -10,7 +10,8 @@ from temba import TembaClient, __version__ as client_version
 from temba.types import Geometry, Boundary
 
 from django.conf import settings
-from django.contrib.auth.models import User, Group
+from django.contrib.auth import get_user_model
+from django.contrib.auth.models import Group
 from django.core import mail
 from django.core.exceptions import DisallowedHost
 from django.core.urlresolvers import reverse, ResolverMatch
@@ -27,6 +28,9 @@ from dash.orgs.models import Org, OrgBackground, Invitation
 from dash.orgs.templatetags.dashorgs import display_time, national_phone
 from dash.orgs.context_processors import GroupPermWrapper
 from dash.stories.models import Story, StoryImage
+
+
+User = get_user_model()
 
 
 class UserTest(SmartminTest):

@@ -3,7 +3,7 @@ import json
 
 import redis
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from django.test import TestCase
 
@@ -18,7 +18,7 @@ class DashTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         cls.clear_cache()
-        cls.superuser = User.objects.create_superuser(
+        cls.superuser = get_user_model().objects.create_superuser(
             username="root", email="super@user.com", password="root")
 
     @classmethod

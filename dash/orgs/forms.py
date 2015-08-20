@@ -4,7 +4,7 @@ from timezones.forms import TimeZoneField
 
 from django import forms
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Org
@@ -21,7 +21,7 @@ class CreateOrgLoginForm(forms.Form):
     def clean_email(self):
         email = self.cleaned_data['email']
         if email:
-            if User.objects.filter(username__iexact=email):
+            if get_user_model().objects.filter(username__iexact=email):
                 raise forms.ValidationError(_("That email address is already used"))
         return email.lower()
 
@@ -41,7 +41,7 @@ class OrgForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(OrgForm, self).__init__(*args, **kwargs)
         if 'administrators' in self.fields:
-            administrators = User.objects.exclude(username__in=['root', 'root2'])
+            administrators = get_user_model().objects.exclude(username__in=['root', 'root2'])
             administrators = administrators.exclude(pk__lt=0)
             self.fields['administrators'].queryset = administrators
 

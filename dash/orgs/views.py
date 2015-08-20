@@ -8,8 +8,7 @@ from smartmin.views import (
 from django import forms
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, get_user_model
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.core.validators import validate_email
@@ -405,6 +404,7 @@ class OrgCRUDL(SmartCRUDL):
                 self.get_object().editors.remove(user)
 
             # now update the org accounts
+            User = get_user_model()
             for field in self.form.fields:
                 if self.form.cleaned_data[field]:
                     matcher = re.match("(\w+)_(\d+)", field)
