@@ -71,7 +71,7 @@ INSTALLED_APPS = (
     'dash.dashblocks',
     'dash.stories',
     'dash.utils',
-
+    'dash.users',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -386,3 +386,5 @@ RESOURCES_DIR = os.path.join(PROJECT_DIR, '../resources')
 TESTFILES_DIR = os.path.join(PROJECT_DIR, '../testfiles')
 MEDIA_ROOT = os.path.join(PROJECT_DIR, '../media')
 MEDIA_URL = "/media/"
+
+AUTH_USER_MODEL = "dash_users.User"
