@@ -42,15 +42,18 @@ class Org(SmartModel):
         help_text=_("The logo that should be used for this organization"))
 
     administrators = models.ManyToManyField(
-        User, verbose_name=_("Administrators"), related_name="org_admins",
+        settings.AUTH_USER_MODEL, verbose_name=_("Administrators"),
+        related_name="org_admins",
         help_text=_("The administrators in your organization"))
 
     viewers = models.ManyToManyField(
-        User, verbose_name=_("Viewers"), related_name="org_viewers",
+        settings.AUTH_USER_MODEL, verbose_name=_("Viewers"),
+        related_name="org_viewers",
         help_text=_("The viewers in your organization"))
 
     editors = models.ManyToManyField(
-        User, verbose_name=_("Editors"), related_name="org_editors",
+        settings.AUTH_USER_MODEL, verbose_name=_("Editors"),
+        related_name="org_editors",
         help_text=_("The editors in your organization"))
 
     language = models.CharField(
