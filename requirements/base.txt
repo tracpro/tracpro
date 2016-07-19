@@ -10,7 +10,6 @@ enum34
 hamlpy
 Pillow
 phonenumbers
-psycopg2
 python-dateutil
 rapidpro-python
 requests
